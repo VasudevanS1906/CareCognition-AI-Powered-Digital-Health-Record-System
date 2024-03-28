@@ -1,0 +1,160 @@
+{% extends "base6.html" %}
+
+{% block content %}
+  <h1>Combination of all 3 Mode</h1>
+  <hr>
+  <h2>Select Language</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="language">Language:</label>
+      <select name="language" id="language" onchange="changeLanguage()">
+        <option value="hindi">Select</option>
+        <option value="tamil">Tamil</option>
+        <option value="marathi">Marathi</option>
+        <option value="hindi">Hindi</option>
+
+      </select>
+
+    </div>
+
+    <div id="patient_id_section">
+      <label for="id_patient_id" id="patient_id_label">Patient ID:</label>
+      <input type="text" id="id_patient_id" name="patient_id">
+    </div>
+    <div>
+        <label for="id_patient_name" id="patient_name_label">Patient Name:</label>
+        <input type="text" id="id_patient_name" name="patient_name">
+
+    </div>
+    <div>
+      <label for="id_age">Age:</label>
+      <input type="text" id="id_age" name="age">
+      <input type="file" id="imageInput2">
+      <button type="button" id="ocrButton2">OCR</button>
+    </div>
+    <div>
+      <label for="id_sex">Gender:</label>
+      <input type="text" id="id_sex" name="sex" step="0.01">
+      <button type="button" onclick="readAloud2('Gender', document.getElementById('id_sex').value)">Read Aloud</button>
+    </div>
+    <div>
+      <label for="id_reason_for_visit">Reason for visit:</label>
+      <input type="text" id="id_reason_for_visit" name="reason_for_visit" step="0.01">
+    </div>
+    <div>
+      <label for="id_image">Image:</label>
+      <input type="file" id="id_image" name="image" accept="image/*">
+
+    </div>
+    <button type="submit">Submit</button>
+    </form>
+    <script>
+      function changeLanguage() {
+        var language = document.getElementById('language').value;
+        var patientIdLabel = document.getElementById('patient_id_label');
+        var patientIdInput = document.getElementById('id_patient_id');
+        var patientNameLabel = document.getElementById('patient_name_label');
+        var patientNameInput = document.getElementById('id_patient_name');
+
+
+        if (language === "hindi") {
+          patientIdLabel.innerText = "रोगी आईडी:";
+
+
+          patientNameLabel.innerText = "रोगी का नाम:";
+          var readAloud1Button = document.createElement('button');
+          readAloud1Button.innerText = "Read Aloud";
+          readAloud1Button.addEventListener('click', function(event) {
+            event.preventDefault();
+            readAloud1('रोगी का नाम');
+          });
+          patientNameInput.parentNode.appendChild(readAloud1Button);
+
+          } else if (language === "tamil") {
+
+
+          patientIdLabel.innerText = "நோயாளி ஐடி:";
+
+
+          patientNameLabel.innerText = "நோயாளி பெயர்:";
+          var readAloudButton = document.createElement('button');
+          readAloudButton.innerText = "Read Aloud";
+          readAloudButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            readAloud('நோயாளி பெயர்');
+          });
+          patientNameInput.parentNode.appendChild(readAloudButton);
+
+          } else if (language === "marathi") {
+
+
+          patientIdLabel.innerText = "रुग्ण आयडी:";
+
+
+          patientNameLabel.innerText = "रुग्णाचे नाव:";
+          var readAloudButton = document.createElement('button');
+          readAloudButton.innerText = "Read Aloud";
+          readAloudButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            readAloud('रुग्णाचे नाव');
+          });
+          patientNameInput.parentNode.appendChild(readAloudButton);
+
+          }
+        }
+          function readAloud(text) {
+            event.stopPropagation();
+            var speech = new SpeechSynthesisUtterance();
+            speech.text = text;
+            speech.lang = "hi-IN"; // Set the language code for Hindi (you can use "ta-IN" for Tamil, "mr-IN" for Marathi, etc.)
+
+            speechSynthesis.speak(speech);
+          }
+
+          function readAloud1(text) {
+            event.stopPropagation();
+            var speech = new SpeechSynthesisUtterance();
+            speech.text = text;
+            speech.lang = "hi-IN"; // Set the language code for Hindi (you can use "ta-IN" for Tamil, "mr-IN" for Marathi, etc.)
+
+            speechSynthesis.speak(speech);
+          }
+      </script>
+    <script>
+        const ocrButton2 = document.querySelector('#ocrButton2');
+        const imageInput2 = document.querySelector('#imageInput2');
+        const ageInput = document.querySelector('#id_age');
+
+
+        ocrButton2.addEventListener('click', async () => {
+          const file = imageInput2.files[0];
+          const formData = new FormData();
+          formData.append('image', file);
+
+          try {
+            const response = await fetch('/perform_ocr', {
+              method: 'POST',
+              body: formData
+            });
+            if (response.ok) {
+              const data = await response.text();
+              ageInput.value = data; // Populate the recognized text into the SKU ID input field
+            } else {
+              console.error('Failed to perform OCR');
+            }
+          } catch (error) {
+            console.error('Error performing OCR:', error);
+          }
+        });
+    </script>
+    <script>
+        function readAloud2(label, value) {
+            const msg = new SpeechSynthesisUtterance();
+            msg.text = label + ": " + value;
+            window.speechSynthesis.speak(msg);
+        }
+    </script>
+  <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary" style="background-color: yellow; color: black; padding: 10px 20px; border: none; cursor: pointer; margin: 5px; text-decoration: none; display: inline-block;">Back</a>
+  
+{% endblock content %}

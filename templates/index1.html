@@ -1,0 +1,13 @@
+{% extends "base1.html" %}
+
+{% block content %}
+  <h1>Text mode</h1>
+  <hr>
+  <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Add Product</button>
+  </form>
+  <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary" style="background-color: yellow; color: black; padding: 10px 20px; border: none; cursor: pointer; margin: 5px; text-decoration: none; display: inline-block;">Back</a>
+
+{% endblock content %}

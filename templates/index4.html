@@ -1,0 +1,306 @@
+{% extends "base4.html" %}
+
+{% block content %}
+  <h1>Voice Indic Mode</h1>
+  <hr>
+  <h2>Select Language</h1>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="language">Language:</label>
+      <select name="language" id="language" onchange="changeLanguage()">
+        <option value="hindi">Select</option>
+        <option value="tamil">Tamil</option>
+        <option value="marathi">Marathi</option>
+        <option value="hindi">Hindi</option>
+
+      </select>
+
+    </div>
+
+    <div id="patient_id_section">
+      <label for="id_patient_id" id="patient_id_label">Patient ID:</label>
+      <input type="text" id="id_patient_id" name="patient_id">
+    </div>
+    <div>
+        <label for="id_patient_name" id="patient_name_label">Patient Name:</label>
+        <input type="text" id="id_patient_name" name="patient_name">
+
+    </div>
+    <div>
+        <label for="id_age" id="age_label">Age:</label>
+        <input type="text" id="id_age" name="age">
+
+    </div>
+    <div>
+        <label for="id_sex" id='sex_label'>Sex:</label>
+        <input type="text" id="id_sex" name="sex" step="0.01">
+
+    </div>
+    <div>
+        <label for="id_reason_for_visit" id='reason_for_visit_label'>Reason for Visit:</label>
+        <input type="text" id="id_reason_for_visit" name="reason_for_visit" step="0.01">
+
+    </div>
+    <div>
+        <label for="id_image" id="image_label">Image:</label>
+        <input type="file" id="id_image" name="image" accept="image/*">
+
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+
+  <script>
+    function changeLanguage() {
+      var language = document.getElementById('language').value;
+      var patientIdLabel = document.getElementById('patient_id_label');
+      var patientIdInput = document.getElementById('id_patient_id');
+      var patientNameLabel = document.getElementById('patient_name_label');
+      var patientNameInput = document.getElementById('id_patient_name');
+      var ageLabel = document.getElementById('age_label');
+      var ageInput = document.getElementById('id_age');
+      var sexLabel = document.getElementById('sex_label');
+      var sexInput = document.getElementById('id_sex');
+      var reasonforvisitLabel = document.getElementById('reason_for_visit_label');
+      var reasonforvisitInput = document.getElementById('id_reason_for_visit');
+      var imageLabel = document.getElementById('image_label');
+      var imageInput = document.getElementById('id_image');
+
+      if (language === "hindi") {
+        patientIdLabel.innerText = "रोगी आईडी:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('रोगी आईडी');
+        });
+        patientIdInput.parentNode.appendChild(readAloudButton);
+
+        patientNameLabel.innerText = "रोगी का नाम:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('रोगी का नाम');
+        });
+        patientNameInput.parentNode.appendChild(readAloudButton);
+
+        ageLabel.innerText = "आयु:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('आयु');
+        });
+        ageInput.parentNode.appendChild(readAloudButton);
+
+        sexLabel.innerText = "लिंग:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('लिंग');
+        });
+        sexInput.parentNode.appendChild(readAloudButton);
+
+        reasonforvisitLabel.innerText = "यात्रा का कारण:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('यात्रा का कारण');
+        });
+        reasonforvisitInput.parentNode.appendChild(readAloudButton);
+
+        imageLabel.innerText = "छवि:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('छवि');
+        });
+        imageInput.parentNode.appendChild(readAloudButton);
+
+
+
+      } else if (language === "tamil") {
+
+
+        patientIdLabel.innerText = "நோயாளி ஐடி:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('நோயாளி ஐடி');
+        });
+        patientIdInput.parentNode.appendChild(readAloudButton);
+
+        patientNameLabel.innerText = "நோயாளி பெயர்:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('நோயாளி பெயர்');
+        });
+        patientNameInput.parentNode.appendChild(readAloudButton);
+
+        ageLabel.innerText = "வயது:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('வயது');
+        });
+        ageInput.parentNode.appendChild(readAloudButton);
+
+        sexLabel.innerText = "பாலினம்:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('பாலினம்');
+        });
+        sexInput.parentNode.appendChild(readAloudButton);
+
+        reasonforvisitLabel.innerText = "வருகைக்கான காரணம்:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('வருகைக்கான காரணம்');
+        });
+        reasonforvisitInput.parentNode.appendChild(readAloudButton);
+
+        imageLabel.innerText = "படம்:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('படம்');
+        });
+        imageInput.parentNode.appendChild(readAloudButton);
+
+      } else if (language === "marathi") {
+
+
+        patientIdLabel.innerText = "रुग्ण आयडी:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('रुग्ण आयडी');
+        });
+        patientIdInput.parentNode.appendChild(readAloudButton);
+
+        patientNameLabel.innerText = "रुग्णाचे नाव:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('रुग्णाचे नाव');
+        });
+        patientNameInput.parentNode.appendChild(readAloudButton);
+
+        ageLabel.innerText = "वय:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('वय');
+        });
+        ageInput.parentNode.appendChild(readAloudButton);
+
+        sexLabel.innerText = "लिंग:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('लिंग');
+        });
+        sexInput.parentNode.appendChild(readAloudButton);
+
+        reasonforvisitLabel.innerText = "भेटीसाठी कारण:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('भेटीसाठी कारण');
+        });
+        reasonforvisitInput.parentNode.appendChild(readAloudButton);
+
+        imageLabel.innerText = "प्रतिमा:";
+        var readAloudButton = document.createElement('button');
+        readAloudButton.innerText = "Read Aloud";
+        readAloudButton.addEventListener('click', function(event) {
+          event.preventDefault();
+          readAloud('प्रतिमा');
+        });
+        imageInput.parentNode.appendChild(readAloudButton);
+      }
+    }
+
+
+
+    function readAloud(text) {
+      event.stopPropagation();
+      var speech = new SpeechSynthesisUtterance();
+      speech.text = text;
+      speech.lang = "hi-IN"; // Set the language code for Hindi (you can use "ta-IN" for Tamil, "mr-IN" for Marathi, etc.)
+
+      speechSynthesis.speak(speech);
+    }
+
+    function readAloud1(text) {
+      event.stopPropagation();
+      var speech = new SpeechSynthesisUtterance();
+      speech.text = text;
+      speech.lang = "hi-IN"; // Set the language code for Hindi (you can use "ta-IN" for Tamil, "mr-IN" for Marathi, etc.)
+
+      speechSynthesis.speak(speech);
+    }
+
+    function readAloud1(text) {
+      event.stopPropagation();
+      var speech = new SpeechSynthesisUtterance();
+      speech.text = text;
+      speech.lang = "hi-IN"; // Set the language code for Hindi (you can use "ta-IN" for Tamil, "mr-IN" for Marathi, etc.)
+
+      speechSynthesis.speak(speech);
+    }
+
+    function readAloud2(text) {
+      event.stopPropagation();
+      var speech = new SpeechSynthesisUtterance();
+      speech.text = text;
+      speech.lang = "hi-IN"; // Set the language code for Hindi (you can use "ta-IN" for Tamil, "mr-IN" for Marathi, etc.)
+
+      speechSynthesis.speak(speech);
+    }
+
+    function readAloud3(text) {
+      event.stopPropagation();
+      var speech = new SpeechSynthesisUtterance();
+      speech.text = text;
+      speech.lang = "hi-IN"; // Set the language code for Hindi (you can use "ta-IN" for Tamil, "mr-IN" for Marathi, etc.)
+
+      speechSynthesis.speak(speech);
+    }
+
+    function readAloud4(text) {
+      event.stopPropagation();
+      var speech = new SpeechSynthesisUtterance();
+      speech.text = text;
+      speech.lang = "hi-IN"; // Set the language code for Hindi (you can use "ta-IN" for Tamil, "mr-IN" for Marathi, etc.)
+
+      speechSynthesis.speak(speech);
+
+    }
+
+
+  </script>
+
+
+
+  <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary" style="background-color: yellow; color: black; padding: 10px 20px; border: none; cursor: pointer; margin: 5px; text-decoration: none; display: inline-block;">Back</a>
+
+{% endblock content %}

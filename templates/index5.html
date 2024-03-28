@@ -1,0 +1,199 @@
+{% extends "base5.html" %}
+
+{% block content %}
+  <h1>Image Mode</h1>
+  <hr>
+  <form id="productForm" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="id_patient_id">Patient ID:</label>
+      <input type="text" id="id_patient_id" name="patient_id">
+      <input type="file" id="imageInput">
+      <button type="button" id="ocrButton">OCR</button>
+    </div>
+
+    <div>
+      <label for="id_patient_name">Patient Name:</label>
+      <input type="text" id="id_patient_name" name="patient_name">
+      <input type="file" id="imageInput1">
+      <button type="button" id="ocrButton1">OCR</button>
+    </div>
+
+    <div>
+      <label for="id_age">Age:</label>
+      <input type="text" id="id_age" name="age">
+      <input type="file" id="imageInput2">
+      <button type="button" id="ocrButton2">OCR</button>
+    </div>
+
+    <div>
+      <label for="id_sex">Sex:</label>
+      <input type="text" id="id_sex" name="sex" step="0.01">
+      <input type="file" id="imageInput3">
+      <button type="button" id="ocrButton3">OCR</button>
+    </div>
+
+    <div>
+      <label for="id_reason_for_visit">Reason for Visit:</label>
+      <input type="text" id="id_reason_for_visit" name="reason_for_visit" step="0.01">
+      <input type="file" id="imageInput4">
+      <button type="button" id="ocrButton4">OCR</button>
+    </div>
+
+    <div>
+      <label for="id_image">Image:</label>
+      <input type="file" id="id_image" name="image" accept="image/*">
+
+    </div>
+
+    <button type="submit">Submit</button>
+  </form>
+
+
+
+  <script>
+      const ocrButton = document.querySelector('#ocrButton');
+      const imageInput = document.querySelector('#imageInput');
+      const patientIdInput = document.querySelector('#id_patient_id');
+
+      function handleOCRResponse(responseJson) {
+        var recognizedText = responseJson.recognized_text.OCRText[0][0];
+        patientIdInput.value = recognizedText; // Populate the recognized text into the SKU ID input field
+      }
+
+      ocrButton.addEventListener('click', async () => {
+        const file = imageInput.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+          const response = await fetch('/perform_ocr', {
+            method: 'POST',
+            body: formData
+          });
+          if (response.ok) {
+            const data = await response.text();
+            patientIdInput.value = data; // Populate the recognized text into the SKU ID input field
+          } else {
+            console.error('Failed to perform OCR');
+          }
+        } catch (error) {
+          console.error('Error performing OCR:', error);
+        }
+      });
+  </script>
+
+  <script>
+      const ocrButton1 = document.querySelector('#ocrButton1');
+      const imageInput1 = document.querySelector('#imageInput1');
+      const patientNameInput = document.querySelector('#id_patient_name');
+
+
+      ocrButton1.addEventListener('click', async () => {
+        const file = imageInput1.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+          const response = await fetch('/perform_ocr', {
+            method: 'POST',
+            body: formData
+          });
+          if (response.ok) {
+            const data = await response.text();
+            patientNameInput.value = data; // Populate the recognized text into the SKU ID input field
+          } else {
+            console.error('Failed to perform OCR');
+          }
+        } catch (error) {
+          console.error('Error performing OCR:', error);
+        }
+      });
+  </script>
+
+  <script>
+      const ocrButton2 = document.querySelector('#ocrButton2');
+      const imageInput2 = document.querySelector('#imageInput2');
+      const ageInput = document.querySelector('#id_age');
+
+
+      ocrButton2.addEventListener('click', async () => {
+        const file = imageInput2.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+          const response = await fetch('/perform_ocr', {
+            method: 'POST',
+            body: formData
+          });
+          if (response.ok) {
+            const data = await response.text();
+            ageInput.value = data; // Populate the recognized text into the SKU ID input field
+          } else {
+            console.error('Failed to perform OCR');
+          }
+        } catch (error) {
+          console.error('Error performing OCR:', error);
+        }
+      });
+  </script>
+
+  <script>
+      const ocrButton3 = document.querySelector('#ocrButton3');
+      const imageInput3 = document.querySelector('#imageInput3');
+      const sexInput = document.querySelector('#id_sex');
+
+
+      ocrButton3.addEventListener('click', async () => {
+        const file = imageInput3.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+          const response = await fetch('/perform_ocr', {
+            method: 'POST',
+            body: formData
+          });
+          if (response.ok) {
+            const data = await response.text();
+            sexInput.value = data; // Populate the recognized text into the SKU ID input field
+          } else {
+            console.error('Failed to perform OCR');
+          }
+        } catch (error) {
+          console.error('Error performing OCR:', error);
+        }
+      });
+  </script>
+
+  <script>
+      const ocrButton4 = document.querySelector('#ocrButton4');
+      const imageInput4 = document.querySelector('#imageInput4');
+      const reasonforvisitInput = document.querySelector('#id_reason_for_visit');
+
+
+      ocrButton4.addEventListener('click', async () => {
+        const file = imageInput4.files[0];
+        const formData = new FormData();
+        formData.append('image', file);
+
+        try {
+          const response = await fetch('/perform_ocr', {
+            method: 'POST',
+            body: formData
+          });
+          if (response.ok) {
+            const data = await response.text();
+            reasonforvisitInput.value = data; // Populate the recognized text into the SKU ID input field
+          } else {
+            console.error('Failed to perform OCR');
+          }
+        } catch (error) {
+          console.error('Error performing OCR:', error);
+        }
+      });
+  </script>
+  
+  <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary" style="background-color: yellow; color: black; padding: 10px 20px; border: none; cursor: pointer; margin: 5px; text-decoration: none; display: inline-block;">Back</a>
+{% endblock content %}

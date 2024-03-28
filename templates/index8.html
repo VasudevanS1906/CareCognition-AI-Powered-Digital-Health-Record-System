@@ -1,0 +1,71 @@
+{% extends "base8.html" %}
+
+{% block content %}
+  <h1>Data Visualization Dashboard</h1>
+
+  <!-- Container for the Age Distribution Bar Chart -->
+  <div>
+      <h2>Age Distribution</h2>
+      <canvas id="ageChart" width="800" height="450"></canvas>
+  </div>
+
+  <!-- Container for the Sex Distribution Pie Chart -->
+  <div>
+      <h2>Gender Distribution</h2>
+      <canvas id="sexChart" width="800" height="450"></canvas>
+  </div>
+
+  <script>
+      // Data for the Age Distribution Bar Chart
+      var ageCtx = document.getElementById('ageChart').getContext('2d');
+      var ageChart = new Chart(ageCtx, {
+          type: 'bar',
+          data: {
+              labels: {{ ages|safe }},
+              datasets: [{
+                  label: 'Number of Patients by Age',
+                  data: {{ totals|safe }},
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.2)',
+                      'rgba(54, 162, 235, 0.2)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              scales: {
+                  y: {
+                      beginAtZero: true
+                  }
+            }
+          }
+      });
+
+      // Data for the Sex Distribution Pie Chart
+      var sexCtx = document.getElementById('sexChart').getContext('2d');
+      var sexChart = new Chart(sexCtx, {
+          type: 'pie',
+          data: {
+              labels: {{ sexes|safe }},
+              datasets: [{
+                  label: 'Sex Distribution',
+                  data: {{ totals|safe }},
+                  backgroundColor: [
+                      'rgba(255, 99, 132, 0.5)',
+                      'rgba(54, 162, 235, 0.5)'
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                      'rgba(54, 162, 235, 1)'
+                  ],
+                  borderWidth: 1
+              }]
+          }
+      });
+  </script>
+  <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary" style="background-color: yellow; color: black; padding: 10px 20px; border: none; cursor: pointer; margin: 5px; text-decoration: none; display: inline-block;">Back</a>
+{% endblock content %}

@@ -1,0 +1,10 @@
+body {
+    background-color: #f0f0f0; /* Light gray background */
+    font-family: Arial, sans-serif; /* Use a common font for better readability */
+}
+
+h1 {
+    color: #333; /* Dark gray color for heading */
+    margin-left: 20px;
+}
+

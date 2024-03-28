@@ -1,0 +1,33 @@
+{% extends "base7.html" %}
+
+{% block content %}
+  <h1>View Records Mode</h1>
+  <hr>
+  <table class="table table-striped" border="5">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Patient ID</th>
+        <th scope="col">Patient Name</th>
+        <th scope="col">Age</th>
+        <th scope="col">Sex</th>
+        <th scope="col">Reason for Visit</th>
+        <th scope="col">Image</th>
+      </tr>
+    </thead>
+            {% for emp in emps %}
+    <tbody>
+      <tr>
+        <th scope="row">{{emp.id}}</th>
+        <td>{{emp.patient_id}}</td>
+        <td>{{emp.patient_name}}</td>
+        <td>{{emp.age}}</td>
+        <td>{{emp.sex}}</td>
+        <td>{{emp.reason_for_visit}}</td>
+        <td style="background-image: url('../{{emp.image}}'); background-size: cover; width: 150px; height: 150px;"></td>
+      </tr>
+    </tbody>
+            {% endfor %}
+  </table>
+  <a href="{{ request.META.HTTP_REFERER }}" class="btn btn-primary" style="background-color: yellow; color: black; padding: 10px 20px; border: none; cursor: pointer; margin: 5px; text-decoration: none; display: inline-block;">Back</a>
+{% endblock content %}
