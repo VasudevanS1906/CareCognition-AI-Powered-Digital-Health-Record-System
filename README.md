@@ -1,6 +1,9 @@
 ![Screenshot](logo.png)
 
-# CareCognition-AI-Powered-Digital-Health-Record-System
+# DjangoCare: AI-Enhanced Electronic Health Record Platform
+## CareCognition-AI-Powered-Digital-Health-Record-System
+Introducing DjangoCare, an advanced electronic health record (EHR) system developed using Django and deployed on PythonAnywhere. Formerly known as CareCognitionAI during its development phase, DjangoCare has undergone numerous updates and enhancements, including the integration of hospital systems.
+DjangoCare is a cutting-edge electronic health record (EHR) platform built using the Django web framework and deployed as a fully functional website on PythonAnywhere. This innovative system harnesses the power of artificial intelligence to revolutionize patient data management and enhance the quality of healthcare delivery.
 A comprehensive platform that leverages AI to digitize and streamline patient health data. Supports text, voice, and image input across multiple languages, enabling efficient data entry. Includes an advanced data visualization dashboard for real-time health insights.
 
 ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![](https://img.shields.io/pypi/pyversions/django)
