@@ -18,8 +18,8 @@ A comprehensive platform that leverages AI to digitize and streamline patient he
 * 24/03/24 - The project has been deployed as fully functional website at [https://riian.pythonanywhere.com/] with Python Anywhere
 
 # Main Page
- The Main Page of DjangoCare PLatform has been displayed as follows,
- ![Screemshot]()
+ The Main Page of DjangoCare Platform has been displayed as follows,
+ ![Screenshot](main_page.png)
 
 # Technical Report
 
